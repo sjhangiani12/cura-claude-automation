@@ -1,6 +1,9 @@
-# Cura runtime artifacts (fund-confidential — never commit)
+# Monet runtime artifacts (fund-confidential — never commit)
+monet-config.md
+monet-config.md.bak
 cura-config.md
 cura-config.md.bak
+monet-outputs/
 cura-outputs/
 
 # OS / editor noise

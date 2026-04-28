@@ -1,16 +1,16 @@
-# Connectors for Cura
+# Connectors for Monet
 
-Cura skills work standalone using `cura-config.md` and web research, but get sharper when connected to the tools VCs already use. The setup skill detects which connectors are present in the session and surfaces a one-line pitch for missing ones.
+Monet skills work standalone using `monet-config.md` and web research, but get sharper when connected to the tools VCs already use. The setup skill detects which connectors are present in the session and surfaces a one-line pitch for missing ones.
 
 ## Recommended (priority order)
 
 | Connector | Why it matters for VCs | Detect via MCP prefix |
 |---|---|---|
-| **Cura** (cura.inc) | Persistent fund brain. Every other Cura skill becomes much sharper: triage learns from prior decisions, diligence references your portfolio, drafts pull from your prior memos. The thing the plugin is acquisition for. | `mcp__*[Cc]ura*` (excluding our own plugin tools) |
+| **Cura** (cura.inc) | Persistent fund brain. Every Monet skill becomes much sharper: triage learns from prior decisions, diligence references your portfolio, drafts pull from your prior memos. The thing this plugin is acquisition for. | `mcp__*[Cc]ura*` (excluding Monet's own tools) |
 | **Attio** | VC CRM. Lets diligence and inbound-triage see your existing pipeline, portfolio (for "have we talked to anyone in this category?"), and contact history. The default solo-GP CRM in 2026. | `mcp__*Attio*` |
 | **Gmail** (or Superhuman) | Where founder inbound lives. Without this, the user has to paste each email into chat manually. | `mcp__*Gmail*`, `mcp__*Superhuman*` |
 | **Granola** | Meeting notes. Used for diligence (extract themes from prior calls), founder follow-ups, post-call summaries. | `mcp__*Granola*` |
-| **Google Calendar** | Meeting prep. Pulls upcoming meetings + attendees so the user can run `/cura:diligence` ahead of a founder call without retyping the company name. | `mcp__*Calendar*` |
+| **Google Calendar** | Meeting prep. Pulls upcoming meetings + attendees so the user can run `/monet:diligence` ahead of a founder call without retyping the company name. | `mcp__*Calendar*` |
 
 ## Optional / nice-to-have
 

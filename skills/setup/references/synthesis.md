@@ -1,6 +1,6 @@
 # Per-section synthesis directives
 
-When the user picks "Draft from my tools" or "Mix" mode in `/cura:setup`, work through each profile section in this order. For each section: try the highest-priority connected source first, then fall back. Always show the user what you derived AND its source — never present synthesized content as if they typed it.
+When the user picks "Draft from my tools" or "Mix" mode in `/monet:setup`, work through each profile section in this order. For each section: try the highest-priority connected source first, then fall back. Always show the user what you derived AND its source — never present synthesized content as if they typed it.
 
 ## Order of synthesis
 
@@ -77,7 +77,7 @@ Run sections in this order — earlier ones often inform later ones.
 
 If user picks "See them and pick": render each sample with a 1-line attribution ("From: reply to founder X, March 2026") and let them keep/discard.
 
-**Privacy note:** When storing voice samples in cura-config.md, redact the founder's name and company from the sample. Replace with `[founder]` and `[company]`. The voice is what matters; the specifics are not.
+**Privacy note:** When storing voice samples in monet-config.md, redact the founder's name and company from the sample. Replace with `[founder]` and `[company]`. The voice is what matters; the specifics are not.
 
 ## Section 5: Thesis
 
@@ -135,6 +135,6 @@ In future versions, Cura MCP could surface this from past pass decisions ("you p
 ## What synthesis should NOT do
 
 - Never call MCP tools the user didn't authorize the plugin to use. If a connector is present but the user said "skip," do not query it.
-- Never store raw queried data in `cura-config.md` (e.g. don't paste 8 emails verbatim). Store *derived* signals (voice samples, sector list, network names) — not the raw source data.
+- Never store raw queried data in `monet-config.md` (e.g. don't paste 8 emails verbatim). Store *derived* signals (voice samples, sector list, network names) — not the raw source data.
 - Never present synthesized content as the user's words. Always attribute the source.
 - Never block on a connector that returns an error. If Attio is connected but the query fails, fall back to the manual question for that section. Note the error briefly: "Attio query failed; let me just ask you directly."

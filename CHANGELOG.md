@@ -1,6 +1,26 @@
 # Changelog
 
-All notable changes to the Cura plugin are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [SemVer](https://semver.org/).
+All notable changes to the Monet plugin are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [SemVer](https://semver.org/).
+
+> Brand history: this plugin was named `cura` through v0.4.1. Renamed to `monet` at v0.5.0 to distinguish the plugin/product (Monet) from the parent company (Cura at cura.inc). All `/cura:*` commands and `~/.cura/` paths from earlier versions are now `/monet:*` and `~/.monet/`.
+
+## [0.5.0] — 2026-04-28
+
+Renamed: cura → monet.
+
+### Changed
+- **Plugin name: `cura` → `monet`.** Slash commands change: `/cura:setup` → `/monet:setup`, `/cura:inbound-triage` → `/monet:inbound-triage`. The plugin is now branded "Monet — Claude Automation by Cura."
+- **Config path: `~/.cura/cura-config.md` → `~/.monet/monet-config.md`.** Setup skill auto-detects legacy configs at `~/.cura/cura-config.md` and `./cura-config.md` (very old working-dir location) and offers to migrate them. No manual data migration needed.
+- All skill references, README, build plan, and project context updated to reflect the rename. References to "Cura" the parent brand at cura.inc are preserved (Cura MCP, cura.inc upgrade nudges, parent brand attribution).
+
+### Added
+- Roadmap section in `CLAUDE.md` reflecting the post-research priority order: `weekly-digest`, `memo-write`, `intro-triage`, `lp-letter`, `reference-orchestration`.
+- 5-phase build process documented in `CLAUDE.md` (JTBD → Design → Build → Test → Tighten) so future skills are built thoughtfully, not stacked.
+- Surprising-findings section in `CLAUDE.md` from solo-GP workflow research (CRM is a graveyard, voice fidelity is the killer feature, etc.).
+
+### Migration for existing testers
+- v0.4.x users with `~/.cura/cura-config.md`: re-run `/monet:setup`. The skill will detect your old config and offer to copy it to `~/.monet/monet-config.md`. Backup of the old file is automatic.
+- Slash invocations: `/cura:setup` no longer works. Use `/monet:setup`.
 
 ## [0.4.1] — 2026-04-28
 

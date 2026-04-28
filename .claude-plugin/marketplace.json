@@ -7,9 +7,9 @@
   },
   "plugins": [
     {
-      "name": "cura",
+      "name": "monet",
       "source": "./",
-      "description": "VC workflows for solo GPs and small funds. Walks you through onboarding (thesis, sectors, voice, connectors), then triages inbound founder pitches against your config and drafts replies in your style."
+      "description": "Claude Automation by Cura — VC workflows for solo GPs. Walks you through onboarding (synthesizes your fund profile from Gmail/Attio/Granola/Drive/Cura), then triages inbound founder pitches and drafts replies in your style."
     }
   ]
 }

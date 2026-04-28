@@ -1,6 +1,8 @@
-# Cura Plugin Build Plan
+# Monet Plugin Build Plan
 
-A `cura` Claude plugin for **Claude Cowork** (and Claude Code): VC-specific workflows installed once, invoked from the `/` skill picker. Works standalone; gets sharper when Cura MCP is connected.
+**Monet — Claude Automation by [Cura](https://cura.inc).** A Claude plugin for **Cowork** (and Code): VC-specific workflows installed once, invoked from the `/` skill picker. Works standalone; gets sharper when Cura MCP is connected.
+
+> Brand: **Monet** is the plugin/product. **Cura** is the parent brand at cura.inc and the persistent fund-brain MCP. References to "Cura" in this doc as the strategic frame / SaaS / MCP are the parent brand. References to slash commands and the plugin name use "Monet."
 
 ---
 
@@ -8,9 +10,9 @@ A `cura` Claude plugin for **Claude Cowork** (and Claude Code): VC-specific work
 
 The original draft of this plan made a few wrong assumptions about the plugin spec. Corrections below; the rest of the document still applies but should be read with these in mind:
 
-- **No "lobby" skill.** Typing `/cura` in Cowork natively filters the `/` skill picker to skills shipped by this plugin. We don't build a help skill — Cowork does it for free. The "Six Components" section below drops to five.
+- **No "lobby" skill.** Typing `/monet` in Cowork natively filters the `/` skill picker to skills shipped by this plugin. We don't build a help skill — Cowork does it for free. The "Six Components" section below drops to five.
 - **`commands/` is NOT legacy.** Both `commands/` (flat `.md` files) and `skills/<name>/SKILL.md` (subdirectories with optional supporting files) are first-class. Several official Anthropic plugins (`product-management`, `pdf-viewer`) use both. Use `skills/` when a skill needs supporting files; `commands/` for single-file skills.
-- **Invocation is the skill name, optionally namespaced.** `/cura:setup` and `/setup` both work. The `description` field in SKILL.md frontmatter is the trigger — written as natural-language use cases, not as event handlers. It does double duty: skill-picker copy AND auto-trigger signal.
+- **Invocation is the skill name, optionally namespaced.** `/monet:setup` and `/setup` both work. The `description` field in SKILL.md frontmatter is the trigger — written as natural-language use cases, not as event handlers. It does double duty: skill-picker copy AND auto-trigger signal.
 - **Skills can be both manually invoked AND auto-triggered.** Earlier framing of "auto-trigger only" was wrong.
 
 ---
@@ -33,17 +35,17 @@ cura/
 │   ├── plugin.json
 │   └── marketplace.json
 ├── skills/
-│   ├── setup/SKILL.md            ← /cura:setup — config generation
-│   ├── inbound-triage/SKILL.md   ← /cura:inbound-triage — score and reply to inbound pitches
-│   └── diligence/SKILL.md        ← /cura:diligence — full company workup
+│   ├── setup/SKILL.md            ← /monet:setup — config generation
+│   ├── inbound-triage/SKILL.md   ← /monet:inbound-triage — score and reply to inbound pitches
+│   └── diligence/SKILL.md        ← /monet:diligence — full company workup
 ├── README.md
 ├── LICENSE
 └── .gitignore
 ```
 
-**Why tighter:** `/cura:diligence` alone has 7 internal stages — that's real engineering. Three orchestrators in v1 means we discover the pattern is wrong across three skills instead of one. Better to ship one excellent skill, watch 5-10 real users, then extend.
+**Why tighter:** `/monet:diligence` alone has 7 internal stages — that's real engineering. Three orchestrators in v1 means we discover the pattern is wrong across three skills instead of one. Better to ship one excellent skill, watch 5-10 real users, then extend.
 
-**v1.1 (after real-user validation):** expose internal components as standalone skills, add `/cura:inbound` and `/cura:lp-update`.
+**v1.1 (after real-user validation):** expose internal components as standalone skills, add `/monet:inbound` and `/monet:lp-update`.
 
 **Components built in v1 but not exposed:**
 - founder research
@@ -53,7 +55,7 @@ cura/
 - risk assessment
 - memo synthesis
 
-These are stages of `/cura:diligence`, callable as their own skills in v1.1+. Cost is the same; surface area is smaller.
+These are stages of `/monet:diligence`, callable as their own skills in v1.1+. Cost is the same; surface area is smaller.
 
 ---
 
@@ -62,9 +64,9 @@ These are stages of `/cura:diligence`, callable as their own skills in v1.1+. Co
 A working v1 plugin needs:
 
 1. **Plugin manifest** — declares the namespace and identity
-2. **Config schema** — `cura-config.md`, the fund-specific layer every skill reads
-3. **Onboarding skill (`/cura:setup`)** — creates the config (auto-fills from Cura MCP if connected)
-4. **Workflow skill** — at least one orchestrator (`/cura:diligence` or `/cura:inbound-triage`) proving the pattern end-to-end
+2. **Config schema** — `monet-config.md`, the fund-specific layer every skill reads
+3. **Onboarding skill (`/monet:setup`)** — creates the config (auto-fills from Cura MCP if connected)
+4. **Workflow skill** — at least one orchestrator (`/monet:diligence` or `/monet:inbound-triage`) proving the pattern end-to-end
 5. **Shared conventions** — config discovery, MCP detection, output handling, voice consistency, fixed-string upgrade nudges
 
 (Cowork natively provides the "lobby" by filtering the `/` picker on the plugin name — no help skill needed.)
@@ -79,7 +81,7 @@ Includes: name, version, description, author, homepage, repository, license, key
 
 ---
 
-## 2. Config Schema (`cura-config.md`)
+## 2. Config Schema (`monet-config.md`)
 
 Human-editable markdown. Lives in working directory. Read by every skill at runtime.
 
@@ -102,7 +104,7 @@ Human-editable markdown. Lives in working directory. Read by every skill at runt
 
 Voice is what makes outputs feel like the user's fund, not generic. We support both modes, default to inline:
 
-**Inline (default).** During `/cura:setup`, user pastes 2-3 prior memos or LP updates directly. Stored in `cura-config.md` under a `## Voice References` section with delimiters.
+**Inline (default).** During `/monet:setup`, user pastes 2-3 prior memos or LP updates directly. Stored in `monet-config.md` under a `## Voice References` section with delimiters.
 
 **File paths (alternative).** User can instead point at file paths or a folder of prior memos. Config stores the paths; skills read those files at runtime.
 
@@ -110,9 +112,9 @@ Voice is what makes outputs feel like the user's fund, not generic. We support b
 
 ---
 
-## 3. Onboarding Skill (`/cura:setup`)
+## 3. Onboarding Skill (`/monet:setup`)
 
-Generates `cura-config.md` through a question flow.
+Generates `monet-config.md` through a question flow.
 
 **Flow (~5 min standalone):**
 1. Thesis (paragraph or paste from website)
@@ -124,11 +126,11 @@ Generates `cura-config.md` through a question flow.
 
 **Cura-connected variant:** detects Cura MCP, pre-fills from existing fund data, asks for confirmation rather than answers. ~30 seconds.
 
-**Re-run behavior:** edits existing config rather than overwriting. Backs up the previous version to `cura-config.md.bak`.
+**Re-run behavior:** edits existing config rather than overwriting. Backs up the previous version to `monet-config.md.bak`.
 
 ---
 
-## 4. Diligence Skill (`/cura:diligence [company]`)
+## 4. Diligence Skill (`/monet:diligence [company]`)
 
 Full company workup. Reference implementation that proves the orchestrator pattern.
 
@@ -142,7 +144,7 @@ Full company workup. Reference implementation that proves the orchestrator patte
 7. **Memo synthesis** — all of the above into structured memo, in fund's voice
 
 **Outputs:**
-- `cura-outputs/[company]-memo-[date].md` — the memo
+- `monet-outputs/[company]-memo-[date].md` — the memo
 - Chat summary including a **"What I researched and what surprised me"** paragraph (the trust-builder — user sees what the orchestrator actually did, not just the artifact)
 
 **Standalone vs. Cura-connected:**
@@ -158,12 +160,12 @@ Full company workup. Reference implementation that proves the orchestrator patte
 
 ## 5. Shared Conventions
 
-**Config discovery.** Every skill checks for `cura-config.md`. If missing → suggest `/cura:setup`. If present but stale (>90 days), gentle reminder.
+**Config discovery.** Every skill checks for `monet-config.md`. If missing → suggest `/monet:setup`. If present but stale (>90 days), gentle reminder.
 
 **Cura MCP detection.** Every skill checks if Cura MCP tools are available. If yes → augment with fund-specific data. If no → run standalone.
 
 **Output conventions.**
-- Memos and drafts → file in `cura-outputs/` + chat summary
+- Memos and drafts → file in `monet-outputs/` + chat summary
 - Every orchestrator chat output ends with "What I researched and what surprised me" paragraph
 - Quick research → chat only
 - Triage results → table in chat
@@ -171,9 +173,9 @@ Full company workup. Reference implementation that proves the orchestrator patte
 **Voice consistency.** All draft-producing skills read voice references from config (inline or file paths) before generating output.
 
 **Upgrade nudges (fixed strings, not dynamic judgments).** Each skill has a single hardcoded nudge tied to a specific Cura capability. Examples:
-- `/cura:diligence`: "Cura would let this memo reference your fund's prior diligence on similar companies."
-- `/cura:setup`: "Cura would auto-populate this from your existing fund data — 30 seconds instead of 5 minutes."
-- `/cura:inbound-triage`: "Cura would triage your inbox continuously and surface only the matches — instead of waiting for you to paste them in."
+- `/monet:diligence`: "Cura would let this memo reference your fund's prior diligence on similar companies."
+- `/monet:setup`: "Cura would auto-populate this from your existing fund data — 30 seconds instead of 5 minutes."
+- `/monet:inbound-triage`: "Cura would triage your inbox continuously and surface only the matches — instead of waiting for you to paste them in."
 
 Each is true regardless of run quality. No meta-judgment required.
 
@@ -194,27 +196,27 @@ Each is true regardless of run quality. No meta-judgment required.
 
 1. **Plugin manifest + marketplace.json** — locks namespace and contract ✅
 2. **Config schema** — every skill depends on it; lock the structure (including voice ingestion sections)
-3. **First skill (`/cura:inbound-triage`)** — prototype that exercises config-read, voice usage, and a draft-output flow without orchestration overhead. Use this as the pattern reference for everything else.
-4. **Setup skill (`/cura:setup`)** — produces the config, voice ingestion lives here
-5. **Diligence skill (`/cura:diligence`)** — full orchestrator with multiple research stages
+3. **First skill (`/monet:inbound-triage`)** — prototype that exercises config-read, voice usage, and a draft-output flow without orchestration overhead. Use this as the pattern reference for everything else.
+4. **Setup skill (`/monet:setup`)** — produces the config, voice ingestion lives here
+5. **Diligence skill (`/monet:diligence`)** — full orchestrator with multiple research stages
 6. **Polish + ship** — README, LICENSE, .gitignore, version tag, marketplace listing
 7. **Watch 5-10 real GPs use it** — instrument what works, what breaks, what they ask for
-8. **v1.1** — expose components as standalone skills, add `/cura:lp-update`
+8. **v1.1** — expose components as standalone skills, add `/monet:lp-update`
 
 ---
 
 ## Locked Decisions
 
-- **Plugin name:** `cura` (kebab-case; claims the namespace)
-- **Slash command syntax:** `/cura:skill-name` (colon-namespacing per plugin spec)
+- **Plugin name:** `monet` (kebab-case; claims the namespace). Renamed from `cura` at v0.5.0 to distinguish the plugin from the parent brand.
+- **Slash command syntax:** `/monet:skill-name` (colon-namespacing per plugin spec)
 - **Distribution:** Free, public, GitHub + marketplace
-- **v1 scope:** Manifest + config + `/cura:setup` + at least one workflow skill. Cowork's native `/`-picker filtering replaces the lobby. One orchestrator at a time, not three.
+- **v1 scope:** Manifest + config + `/monet:setup` + at least one workflow skill. Cowork's native `/`-picker filtering replaces the lobby. One orchestrator at a time, not three.
 - **Config format:** Markdown in working directory
 - **Voice ingestion:** Both inline paste (default) and file paths (alternative). Inline at setup, file paths as override.
 - **Upgrade nudges:** Fixed strings tied to specific capabilities. No dynamic "was this degraded" judgments.
 - **Orchestrator outputs:** Always include "what I researched and what surprised me" summary alongside the artifact.
 - **Cura dependency:** Soft (skills work standalone; Cura makes them sharper).
-- **`/cura:inbound-triage` architecture:** On-demand only. User pastes/forwards an inbound; the skill scores it against config and drafts a reply. Continuous inbox monitoring is a Cura-substrate feature, not a plugin feature.
+- **`/monet:inbound-triage` architecture:** On-demand only. User pastes/forwards an inbound; the skill scores it against config and drafts a reply. Continuous inbox monitoring is a Cura-substrate feature, not a plugin feature.
 
 ---
 
@@ -240,9 +242,9 @@ Both `skills/` and `commands/` are valid. Use `skills/` when a skill has support
 **Manifest (`.claude-plugin/plugin.json`):**
 ```json
 {
-  "name": "cura",
-  "version": "0.1.0",
-  "description": "VC workflows for solo GPs and small funds",
+  "name": "monet",
+  "version": "0.5.0",
+  "description": "Claude Automation by Cura — VC workflows for solo GPs and small funds",
   "author": { "name": "Cura", "email": "team@cura.inc", "url": "https://cura.inc" },
   "homepage": "https://cura.inc",
   "repository": "https://github.com/sjhangiani12/cura-claude-automation",
@@ -262,14 +264,14 @@ version: 1.0.0
 Skill instructions and prompt content...
 ```
 
-**Invocation:** Type `/` in Cowork to open the skill picker. Type `/cura` to filter to this plugin's skills. Invoke directly with `/cura:setup`, `/cura:inbound-triage`, or just `/setup`, `/inbound-triage` (namespaced form is safer when skill names collide across plugins).
+**Invocation:** Type `/` in Cowork to open the skill picker. Type `/cura` to filter to this plugin's skills. Invoke directly with `/monet:setup`, `/monet:inbound-triage`, or just `/setup`, `/inbound-triage` (namespaced form is safer when skill names collide across plugins).
 
 ---
 
 ## Resolved Open Questions
 
 - ~~Exact plugin manifest format~~ → Confirmed via Anthropic docs
-- ~~File paths for config and outputs~~ → `cura-config.md` and `cura-outputs/` in working directory
+- ~~File paths for config and outputs~~ → `monet-config.md` and `monet-outputs/` in working directory
 - ~~How aggressive Cura MCP auto-fill in onboarding~~ → Pre-fill everything, ask for confirmation
 - ~~Whether to ship a `/cura` (no suffix) help command~~ → Not needed. Cowork natively filters the `/` picker on the plugin name.
 - ~~Memo voice ingestion mechanism~~ → Inline paste (default) + file paths (alternative)
@@ -277,6 +279,6 @@ Skill instructions and prompt content...
 
 ## Remaining Open Questions (for build time)
 
-- Exact format of voice references inside `cura-config.md` (delimiters, max length)
-- Whether `cura-outputs/` should be gitignored by default (probably yes — fund-confidential)
+- Exact format of voice references inside `monet-config.md` (delimiters, max length)
+- Whether `monet-outputs/` should be gitignored by default (probably yes — fund-confidential)
 - How skills should display Cura MCP connection status inline when augmenting their output

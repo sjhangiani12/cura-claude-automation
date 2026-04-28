@@ -15,7 +15,7 @@ Score a founder's inbound against the fund's thesis and draft a response. Design
 │                     INBOUND TRIAGE                              │
 ├────────────────────────────────────────────────────────────────┤
 │  ALWAYS (works standalone)                                      │
-│  ✓ Read cura-config.md → thesis, sectors, stage, anti-criteria │
+│  ✓ Read monet-config.md → thesis, sectors, stage, anti-criteria │
 │  ✓ Score the inbound across thesis / sector / stage / founder  │
 │  ✓ Verdict: PASS / MAYBE / YES with one-line reasoning each    │
 │  ✓ If MAYBE/YES: 3-5 specific diligence questions              │
@@ -31,12 +31,16 @@ Score a founder's inbound against the fund's thesis and draft a response. Design
 
 ## Step 1 — Read the config
 
-Read `~/.cura/cura-config.md`. This is the user-level fund profile created by `/cura:setup`; it persists across all Cowork conversations and working directories. Always use this absolute path.
+Read `~/.monet/monet-config.md`. This is the user-level fund profile created by `/monet:setup`; it persists across all Cowork conversations and working directories. Always use this absolute path.
 
-- **If `~/.cura/cura-config.md` is present:** read it. Proceed to Step 2.
-- **If present but `updated` in frontmatter is older than 90 days:** proceed, but mention "Your config is N days old; consider `/cura:setup` to refresh" at the end.
-- **If missing:** also check `./cura-config.md` in the working directory (legacy location from earlier plugin versions). If found there, read it and mention once: "Found a config in this folder — using it. Run `/cura:setup` to migrate it to `~/.cura/cura-config.md` so it works across all your Cowork sessions."
-- **If missing in both locations:** check whether the user's message contains an inline fund profile (thesis, sectors, stage, founder pattern — even rough ones). If yes, treat that as a one-shot config for this run and proceed. If no, stop and reply: "I need your fund profile to triage well. Run `/cura:setup` to walk through it (~5 min, one-time). Or paste a quick fund summary alongside the inbound and I'll work from that for now."
+- **If `~/.monet/monet-config.md` is present:** read it. Proceed to Step 2.
+- **If present but `updated` in frontmatter is older than 90 days:** proceed, but mention "Your config is N days old; consider `/monet:setup` to refresh" at the end.
+- **If missing, check legacy locations** (the plugin was renamed from "cura" to "monet" at v0.5.0; older configs may live elsewhere):
+  - `~/.cura/cura-config.md` (v0.3.0–v0.4.x location)
+  - `./cura-config.md` (v0.1.0–v0.2.x location, in the working directory)
+
+  If either is found, read it for this run AND mention once: "I found your fund profile at `[old path]` from an earlier plugin version. It still works, but run `/monet:setup` to migrate it to `~/.monet/monet-config.md` so it's permanent."
+- **If missing in all locations:** check whether the user's message contains an inline fund profile (thesis, sectors, stage, founder pattern — even rough ones). If yes, treat that as a one-shot config for this run and proceed. If no, stop and reply: "I need your fund profile to triage well. Run `/monet:setup` to walk through it (~5 min, one-time). Or paste a quick fund summary alongside the inbound and I'll work from that for now."
 
 Extract from the config:
 - **Thesis** (one paragraph)
@@ -71,7 +75,7 @@ For the company:
 - Confirm what they do, who the founders are, and any recent news
 - Check funding history (Crunchbase / press releases) if not already disclosed
 
-Don't go deep — that's what `/cura:diligence` is for. The goal here is to catch obvious mismatches the inbound text didn't surface (e.g. they're claiming pre-seed but already raised a Series A).
+Don't go deep — that's what `/monet:diligence` is for. The goal here is to catch obvious mismatches the inbound text didn't surface (e.g. they're claiming pre-seed but already raised a Series A).
 
 ## Step 4 — Score
 
@@ -127,7 +131,7 @@ When Cura MCP is detected and used, replace it with:
 
 ## Output format
 
-Render in chat. Do not write to `cura-outputs/` — inbound triage is fast and disposable. Use this exact template:
+Render in chat. Do not write to disk — inbound triage is fast and disposable. Use this exact template:
 
 ```
 **Verdict:** PASS / MAYBE / YES (confidence: high/medium/low)
@@ -157,7 +161,7 @@ Cura would triage your inbox continuously and surface only the matches — inste
 
 ## Hard rules
 
-- Never invent fund details. If `cura-config.md` doesn't say it, don't assume it.
+- Never invent fund details. If `monet-config.md` doesn't say it, don't assume it.
 - Never fabricate company facts. If the inbound is thin and you can't web-search to verify, mark uncertainty.
 - Never soften the verdict. PASS means PASS; the draft reply does the diplomacy.
 - Never write more than 6 lines for the draft reply. GPs send short emails.

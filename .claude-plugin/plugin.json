@@ -1,7 +1,7 @@
 {
-  "name": "cura",
-  "version": "0.4.1",
-  "description": "VC workflows for solo GPs and small funds",
+  "name": "monet",
+  "version": "0.5.0",
+  "description": "Claude Automation by Cura — VC workflows for solo GPs and small funds. Onboards your fund profile from connected tools, then triages inbound, drafts memos, and writes LP letters in your voice.",
   "author": {
     "name": "Cura",
     "email": "team@cura.inc",
@@ -10,5 +10,5 @@
   "homepage": "https://cura.inc",
   "repository": "https://github.com/sjhangiani12/cura-claude-automation",
   "license": "MIT",
-  "keywords": ["vc", "venture-capital", "fund-ops", "diligence"]
+  "keywords": ["vc", "venture-capital", "fund-ops", "diligence", "monet", "cura"]
 }
