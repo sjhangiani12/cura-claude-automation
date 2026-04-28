@@ -2,6 +2,15 @@
 
 All notable changes to the Cura plugin are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [SemVer](https://semver.org/).
 
+## [0.4.1] — 2026-04-28
+
+Setup synthesis: batch the queries, single review.
+
+### Changed
+- `setup` synthesis flow restructured from per-section interactive ("here's sector — confirm? — here's stage — confirm?") to **batch synthesis + unified review**: all sections drafted in parallel from connected tools, then the user sees the whole drafted profile at once and edits the sections that need changing. Faster, less conversational fatigue, easier to spot inconsistencies between sections.
+- New review step has clear options: [Approve all], [Edit something] (loops through sections), [Show me my voice samples first], [Start over manually].
+- Sections that couldn't be synthesized are surfaced with `_(needs your input)_` markers and the user is forced to address them before save (no silent `(not specified)` writes).
+
 ## [0.4.0] — 2026-04-28
 
 Setup synthesizes the fund profile from connected tools.
