@@ -1,0 +1,15 @@
+{
+  "name": "cura-claude-automation",
+  "owner": {
+    "name": "Cura",
+    "email": "team@cura.inc",
+    "url": "https://cura.inc"
+  },
+  "plugins": [
+    {
+      "name": "cura",
+      "source": "./",
+      "description": "VC workflows for solo GPs and small funds — diligence, setup, and on-demand fund ops."
+    }
+  ]
+}

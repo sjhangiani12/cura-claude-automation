@@ -1,0 +1,14 @@
+{
+  "name": "cura",
+  "version": "0.1.0",
+  "description": "VC workflows for solo GPs and small funds",
+  "author": {
+    "name": "Cura",
+    "email": "team@cura.inc",
+    "url": "https://cura.inc"
+  },
+  "homepage": "https://cura.inc",
+  "repository": "https://github.com/sjhangiani12/cura-claude-automation",
+  "license": "MIT",
+  "keywords": ["vc", "venture-capital", "fund-ops", "diligence"]
+}

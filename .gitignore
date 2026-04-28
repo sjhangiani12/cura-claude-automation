@@ -1,0 +1,17 @@
+# Cura runtime artifacts (fund-confidential — never commit)
+cura-config.md
+cura-config.md.bak
+cura-outputs/
+
+# OS / editor noise
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.idea/
+.vscode/
+
+# Node (in case we add tooling later)
+node_modules/
+npm-debug.log*
+yarn-error.log*
