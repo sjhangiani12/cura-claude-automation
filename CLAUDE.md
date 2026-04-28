@@ -35,16 +35,22 @@ The `description` field is the trigger. Write it as natural-language use cases, 
 
 Study `anthropics/knowledge-work-plugins` skill descriptions as templates (e.g. `sales/skills/call-prep/SKILL.md`).
 
-## Current version: v0.2.0
+## Current version: v0.3.0
 
 Shipped:
 - Plugin scaffold (manifest, marketplace listing, README, LICENSE, CHANGELOG, .gitignore)
-- `setup` skill — guided onboarding. Connector audit + 6-question fund profile → `cura-config.md`. Invoked via `/cura:setup`.
-- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Falls back to inline fund context if no config exists. Invoked via `/cura:inbound-triage`.
+- `setup` skill — guided onboarding. Connector audit + 6-question fund profile → `~/.cura/cura-config.md`. Invoked via `/cura:setup`.
+- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.cura/cura-config.md`. Falls back to legacy working-dir location, then to inline context. Invoked via `/cura:inbound-triage`.
 
 Building next:
-- v0.3.0 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
-- v0.2.1 — voice references via file paths (currently inline only)
+- v0.4.0 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
+- v0.3.x — voice references via file paths (currently inline only)
+
+## Config persistence
+
+**`~/.cura/cura-config.md` is the canonical config location.** User-scoped (one fund per user, follows them across all Cowork conversations and working directories). NOT the working directory — that pattern (used by the `productivity` plugin) is correct for project-scoped state like task lists, but wrong for user-scoped state like a fund profile. Every Cura skill reads from this absolute path; never use a relative path for the config.
+
+If a future skill needs project-scoped state (e.g. notes per portfolio company), THAT can live in the working directory. Fund profile is user-scoped only.
 
 ## Patterns learned from official Anthropic plugins
 

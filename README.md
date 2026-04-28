@@ -47,7 +47,7 @@ Setup runs fine without any of these; it'll just flag what's missing.
 
 ## How it works
 
-Every skill reads `cura-config.md` from your working directory — your fund's thesis, sectors, voice, and pass criteria. Outputs land in `cura-outputs/`. Both are gitignored by default.
+Your fund profile lives at `~/.cura/cura-config.md` — a single file in your home directory that every Cura skill reads. Run `/cura:setup` once and every skill works in every Cowork conversation, no matter what folder you're in. Edit the file directly anytime, or re-run `/cura:setup` to update individual sections.
 
 When the [Cura](https://cura.inc) MCP server is connected, skills augment with fund-specific data: prior memos for voice, portfolio for comparison, network for warm intros. Without Cura, skills run standalone via web research + your config.
 

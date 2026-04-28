@@ -1,6 +1,8 @@
 # cura-config.md template
 
-The setup skill writes this file to the user's working directory. Other Cura skills read it. Keep it readable — the GP should be able to edit it by hand.
+The setup skill writes this file to `~/.cura/cura-config.md` — a user-level location that persists across all Cowork conversations and working directories. Other Cura skills read it from the same path. Keep it readable — the GP should be able to edit it by hand.
+
+**Why `~/.cura/` and not the working directory:** A VC runs setup once but invokes Cura skills from many different Cowork conversations. Storing the config under `~/.cura/` means `/cura:inbound-triage` and `/cura:diligence` work in any conversation without the user having to remember which folder their fund profile lives in.
 
 ```markdown
 ---

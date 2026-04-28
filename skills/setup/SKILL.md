@@ -20,17 +20,19 @@ You are walking a venture capitalist through Cura onboarding. Your job is to pro
 
 ## Step 0 — Check existing state
 
-Read the working directory.
+The fund profile lives at `~/.cura/cura-config.md` — a user-level location that persists across all Cowork conversations and working directories. Always use this absolute path. Do NOT use a working-directory-relative path.
 
-- **If `cura-config.md` exists and the user did NOT pass `--refresh`:** ask `AskUserQuestion`:
+Read `~/.cura/cura-config.md`.
+
+- **If `~/.cura/cura-config.md` exists and the user did NOT pass `--refresh`:** ask `AskUserQuestion`:
   > "I see you've set up Cura before. What would you like to do?"
   > Options: [Update one section, Refresh everything, Show me what's saved, Cancel]
   - "Update one section" → ask which (Thesis / Sectors / Stage / Founder pattern / Voice / Network), edit only that section, save, done.
-  - "Refresh everything" → continue to Step 1 below; back up the existing config to `cura-config.md.bak` first.
+  - "Refresh everything" → continue to Step 1 below; back up the existing config to `~/.cura/cura-config.md.bak` first.
   - "Show me what's saved" → Read the file and summarize each section in 1 line. End.
   - "Cancel" → say "no problem, type `/cura:setup` anytime to update" and stop.
 
-- **If `cura-config.md` does not exist:** continue to Step 1.
+- **If `~/.cura/cura-config.md` does not exist:** continue to Step 1. Also: if `./cura-config.md` exists in the current working directory (a leftover from older plugin versions), tell the user once: "I see an older config in this folder. I'll create your new one at `~/.cura/cura-config.md` so it works across all your Cowork sessions. You can delete the old one when we're done."
 
 ## Step 1 — Frame
 
@@ -101,16 +103,19 @@ After Q6: if the user skipped any critical question (Thesis, Sectors, Founder pa
 
 ## Step 4 — Write the config
 
-Read the template from `${CLAUDE_PLUGIN_ROOT}/skills/setup/references/config-schema.md`. Fill in the user's answers. Write to `cura-config.md` in the working directory. Use today's date for `created` and `updated` in the frontmatter.
+Read the template from `${CLAUDE_PLUGIN_ROOT}/skills/setup/references/config-schema.md`. Fill in the user's answers. Write to `~/.cura/cura-config.md`. Create the `~/.cura/` directory first if it doesn't exist (use `mkdir -p` via Bash, or the Write tool will create parents automatically depending on environment).
 
-If the user is doing "Refresh everything" mode (Step 0), back up the existing file to `cura-config.md.bak` first.
+Use today's date for `created` and `updated` in the frontmatter.
+
+If the user is doing "Refresh everything" mode (Step 0), back up the existing file to `~/.cura/cura-config.md.bak` before writing.
 
 ## Step 5 — Confirm
 
 Show a one-line preview of each section:
 
 ```
-Saved as cura-config.md.
+Saved to ~/.cura/cura-config.md — this lives in your home directory, so every
+Cowork conversation will use the same profile.
 
 - Thesis: [one line summary of their answer]
 - Sectors: [priority list], anti: [anti list]
@@ -119,7 +124,7 @@ Saved as cura-config.md.
 - Voice: [N samples saved]
 - Network: [N names]
 
-Edit anytime by re-running /cura:setup or opening cura-config.md directly.
+Edit anytime by re-running /cura:setup or opening ~/.cura/cura-config.md directly.
 ```
 
 ## Step 6 — First-action prompt

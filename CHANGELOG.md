@@ -2,6 +2,18 @@
 
 All notable changes to the Cura plugin are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [SemVer](https://semver.org/).
 
+## [0.3.0] — 2026-04-28
+
+Config now persists across Cowork sessions.
+
+### Changed
+- **`cura-config.md` moved from working directory to `~/.cura/cura-config.md`.** This is a user-level location that persists across every Cowork conversation, working directory, and plugin update. Run `/cura:setup` once and all Cura skills work in every conversation without re-entering your fund profile.
+- `setup` skill writes to and reads from `~/.cura/cura-config.md`. Backups (when "Refresh everything") go to `~/.cura/cura-config.md.bak`.
+- `inbound-triage` reads `~/.cura/cura-config.md` first, falls back to `./cura-config.md` if found there (with a one-time nudge to migrate via `/cura:setup`).
+
+### Migration for v0.2.0 testers
+Re-run `/cura:setup` once. Old `./cura-config.md` files in working directories are detected and the user is prompted to migrate. Setup takes ~5 minutes.
+
 ## [0.2.0] — 2026-04-28
 
 The actual onboarding ships.

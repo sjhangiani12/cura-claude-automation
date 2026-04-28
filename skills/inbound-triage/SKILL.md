@@ -31,11 +31,12 @@ Score a founder's inbound against the fund's thesis and draft a response. Design
 
 ## Step 1 — Read the config
 
-Look for `cura-config.md` in the user's working directory.
+Read `~/.cura/cura-config.md`. This is the user-level fund profile created by `/cura:setup`; it persists across all Cowork conversations and working directories. Always use this absolute path.
 
-- **If present:** read it. Proceed to Step 2.
-- **If present but older than 90 days:** proceed, but mention "Your config is N days old; consider `/cura:setup` to refresh" at the end.
-- **If missing:** check whether the user's message contains an inline fund profile (thesis, sectors, stage, founder pattern — even rough ones). If yes, treat that as a one-shot config for this run and proceed. If no, stop and reply: "I need your fund profile to triage well. Run `/cura:setup` to walk through it (~5 min), or paste a quick fund summary alongside the inbound and I'll work from that for now."
+- **If `~/.cura/cura-config.md` is present:** read it. Proceed to Step 2.
+- **If present but `updated` in frontmatter is older than 90 days:** proceed, but mention "Your config is N days old; consider `/cura:setup` to refresh" at the end.
+- **If missing:** also check `./cura-config.md` in the working directory (legacy location from earlier plugin versions). If found there, read it and mention once: "Found a config in this folder — using it. Run `/cura:setup` to migrate it to `~/.cura/cura-config.md` so it works across all your Cowork sessions."
+- **If missing in both locations:** check whether the user's message contains an inline fund profile (thesis, sectors, stage, founder pattern — even rough ones). If yes, treat that as a one-shot config for this run and proceed. If no, stop and reply: "I need your fund profile to triage well. Run `/cura:setup` to walk through it (~5 min, one-time). Or paste a quick fund summary alongside the inbound and I'll work from that for now."
 
 Extract from the config:
 - **Thesis** (one paragraph)
