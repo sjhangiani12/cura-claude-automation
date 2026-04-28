@@ -35,17 +35,28 @@ The `description` field is the trigger. Write it as natural-language use cases, 
 
 Study `anthropics/knowledge-work-plugins` skill descriptions as templates (e.g. `sales/skills/call-prep/SKILL.md`).
 
-## Current version: v0.1.0
+## Current version: v0.2.0
 
 Shipped:
 - Plugin scaffold (manifest, marketplace listing, README, LICENSE, CHANGELOG, .gitignore)
-- `inbound-triage` skill — scores a founder inbound against `cura-config.md`, drafts a reply in fund voice. Invoked via `/cura:inbound-triage` or `/inbound-triage`.
-
-Caveat for v0.1.0: `cura-config.md` must be hand-written by the user. The `setup` skill that generates it ships in v0.1.1.
+- `setup` skill — guided onboarding. Connector audit + 6-question fund profile → `cura-config.md`. Invoked via `/cura:setup`.
+- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Falls back to inline fund context if no config exists. Invoked via `/cura:inbound-triage`.
 
 Building next:
-- v0.1.1 — `setup` skill (fund config generation, `/cura:setup`)
-- v0.1.2 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
+- v0.3.0 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
+- v0.2.1 — voice references via file paths (currently inline only)
+
+## Patterns learned from official Anthropic plugins
+
+The `productivity` plugin (in `anthropics/knowledge-work-plugins`) is the canonical reference for state-bearing Cowork skills. Key conventions copied into Cura:
+
+- **Working-directory file persistence.** Cowork desktop has a real working directory; skills read/write files there with normal Read/Write tools. `cura-config.md` lives there same as productivity's `TASKS.md` and `CLAUDE.md`.
+- **Connector detection via MCP prefix.** Skills check whether `mcp__*Gmail*` etc. exist in the session and degrade gracefully when missing.
+- **`AskUserQuestion` for structured Q&A.** Always include Skip and free-text. Never fabricate when user skips.
+- **Progressive disclosure.** Lean SKILL.md (<3k words), detailed schemas/templates in `references/` subdirectory.
+- **Imperative tone in skill bodies.** "Parse the config," not "you should parse the config." Skill bodies are instructions FOR Claude.
+- **Plain language in user-facing turns.** Never expose file paths, schemas, MCP terminology to the user unless they ask.
+- **`${CLAUDE_PLUGIN_ROOT}`** for shipped template paths. Never hardcode.
 
 ## Key conventions
 

@@ -19,42 +19,31 @@ Once installed, type `/cura` in Cowork to filter the skill picker to Cura skills
 
 | Skill | What it does |
 |---|---|
+| `setup` | Guided 5-min onboarding — connector audit + fund profile, generates `cura-config.md` |
 | `inbound-triage` | Score a founder inbound against your thesis; get a verdict, first-call questions, and a draft reply in your voice |
-| `setup` | *(v0.1.1)* Generate `cura-config.md` for your fund |
-| `diligence` | *(v0.1.2)* Full company workup → memo in your voice |
+| `diligence` | *(v0.3.0)* Full company workup → memo in your voice |
 
-Invoke as `/cura:inbound-triage`, `/cura:setup`, `/cura:diligence [company]`, etc. See [docs/build-plan.md](docs/build-plan.md) for the roadmap.
+Invoke as `/cura:setup`, `/cura:inbound-triage`, etc. See [docs/build-plan.md](docs/build-plan.md) for the roadmap.
 
-### Quick start (v0.1.0)
+## Quick start
 
-The `setup` skill that generates `cura-config.md` ships in v0.1.1. For now, hand-write `cura-config.md` in the directory you're working from. Minimum sections:
+1. Install the plugin (above).
+2. Type `/cura:setup` — Cura walks you through ~6 questions about your fund (thesis, sectors, stage, founder pattern, voice, network) and audits which connectors you have wired up. Takes about 5 minutes. Writes `cura-config.md` to your working directory.
+3. Forward a founder inbound and run `/cura:inbound-triage` to score it.
 
-```markdown
-## Thesis
-[1-2 sentences]
+Re-run `/cura:setup` anytime to update individual sections without starting from scratch.
 
-## Priority sectors
-- [sector]
-- [sector]
+### Recommended connectors
 
-## Anti-sectors
-- [sector]
+For best results, connect these in Cowork (Connectors page) before running setup:
 
-## Stage & check size
-[e.g. pre-seed/seed, $250-500k, lead/co-lead]
+- **Cura** (cura.inc) — persistent fund brain, makes every other skill sharper
+- **Attio** — your CRM, for pipeline + portfolio context
+- **Gmail** (or Superhuman) — so triage works on forwarded emails
+- **Granola** — meeting notes for diligence and follow-ups
+- **Google Calendar** — meeting prep before founder calls
 
-## Founder pattern
-**Back instantly:** [traits]
-**Pass instantly:** [traits]
-
-## Pass criteria
-- [hard no]
-
-## Voice references
-[paste 1-2 prior reply emails or memos here, OR list file paths to them]
-```
-
-Then run `/cura:inbound-triage` and paste an inbound.
+Setup runs fine without any of these; it'll just flag what's missing.
 
 ## How it works
 

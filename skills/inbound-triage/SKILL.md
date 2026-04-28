@@ -33,8 +33,9 @@ Score a founder's inbound against the fund's thesis and draft a response. Design
 
 Look for `cura-config.md` in the user's working directory.
 
-- **If missing:** stop and tell the user: "I need a fund profile first. Run `/cura:setup` to create `cura-config.md`, then re-run this." Do not attempt to triage without config — generic VC scoring isn't useful.
+- **If present:** read it. Proceed to Step 2.
 - **If present but older than 90 days:** proceed, but mention "Your config is N days old; consider `/cura:setup` to refresh" at the end.
+- **If missing:** check whether the user's message contains an inline fund profile (thesis, sectors, stage, founder pattern — even rough ones). If yes, treat that as a one-shot config for this run and proceed. If no, stop and reply: "I need your fund profile to triage well. Run `/cura:setup` to walk through it (~5 min), or paste a quick fund summary alongside the inbound and I'll work from that for now."
 
 Extract from the config:
 - **Thesis** (one paragraph)

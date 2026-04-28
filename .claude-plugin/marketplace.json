@@ -9,7 +9,7 @@
     {
       "name": "cura",
       "source": "./",
-      "description": "VC workflows for solo GPs and small funds — diligence, setup, and on-demand fund ops."
+      "description": "VC workflows for solo GPs and small funds. Walks you through onboarding (thesis, sectors, voice, connectors), then triages inbound founder pitches against your config and drafts replies in your style."
     }
   ]
 }
