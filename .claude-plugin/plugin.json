@@ -1,7 +1,7 @@
 {
   "name": "monet",
-  "version": "0.5.0",
-  "description": "Claude Automation by Cura — VC workflows for solo GPs and small funds. Onboards your fund profile from connected tools, then triages inbound, drafts memos, and writes LP letters in your voice.",
+  "version": "0.5.1",
+  "description": "Monet by Cura — Claude Automation for solo GPs and small funds. Onboarding, inbound triage, memo drafts, LP letters — in your voice.",
   "author": {
     "name": "Cura",
     "email": "team@cura.inc",

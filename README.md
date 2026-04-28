@@ -1,10 +1,10 @@
-# Monet — Claude Automation by [Cura](https://cura.inc)
+# Monet by [Cura](https://cura.inc)
 
-VC workflows for solo GPs and small funds, available inside [Claude Cowork](https://claude.com/product/cowork) and Claude Code. Onboarding, inbound triage, diligence, and memo drafts — in your voice.
+**Claude Automation for solo GPs and small funds.** Available inside [Claude Cowork](https://claude.com/product/cowork) and Claude Code. Onboarding, inbound triage, diligence, and memo drafts — in your voice.
 
 Free. Works standalone. Gets sharper when [Cura](https://cura.inc) MCP is connected.
 
-> Monet is the product. [Cura](https://cura.inc) is the persistent fund brain it's built on top of.
+> Monet is the plugin. [Cura](https://cura.inc) is the persistent fund brain it's built on top of.
 
 ## Install
 

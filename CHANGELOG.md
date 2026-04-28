@@ -4,6 +4,16 @@ All notable changes to the Monet plugin are documented here. Format follows [Kee
 
 > Brand history: this plugin was named `cura` through v0.4.1. Renamed to `monet` at v0.5.0 to distinguish the plugin/product (Monet) from the parent company (Cura at cura.inc). All `/cura:*` commands and `~/.cura/` paths from earlier versions are now `/monet:*` and `~/.monet/`.
 
+## [0.5.1] — 2026-04-28
+
+Brand polish: lead with "Monet by Cura" everywhere user-facing.
+
+### Changed
+- Marketplace title and plugin description lead with "Monet by Cura" (was "Claude Automation by Cura"). Cura is visible at first read in the marketplace, README, and skill outputs — but the slash command stays `/monet:*` for typing speed.
+- README title is now "Monet by Cura" with sub-tagline "Claude Automation for solo GPs and small funds."
+- Every skill output ends with the footer `— Monet, by Cura (cura.inc)` on its own line. Quiet, constant brand presence.
+- `CLAUDE.md` locks the brand convention so future skills don't drift: marketplace + README + first-action copy + footers all carry "by Cura"; slash commands stay short.
+
 ## [0.5.0] — 2026-04-28
 
 Renamed: cura → monet.

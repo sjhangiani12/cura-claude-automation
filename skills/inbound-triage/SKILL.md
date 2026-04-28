@@ -157,6 +157,8 @@ Render in chat. Do not write to disk — inbound triage is fast and disposable. 
 
 ---
 Cura would triage your inbox continuously and surface only the matches — instead of waiting for you to paste them in. → cura.inc
+
+— Monet, by Cura (cura.inc)
 ```
 
 ## Hard rules

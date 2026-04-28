@@ -4,7 +4,16 @@
 
 **Monet** is a Claude plugin (Cowork + Code) shipping VC-specific workflows for solo GPs. It's a product by **Cura** (cura.inc) — distributed as a marketplace at `sjhangiani12/cura-claude-automation`. Free; works as acquisition for the Cura SaaS platform.
 
-> Brand: **Monet** is the plugin/product name. **Cura** is the parent brand at cura.inc and the persistent fund-brain MCP. Don't conflate the two — Cura is what makes Monet sharper; Monet is not Cura.
+> Brand: **"Monet by Cura"** is the canonical product name when shown to users. **Monet** is the slash-command name (`/monet:setup`). **Cura** is the parent brand at cura.inc and the persistent fund-brain MCP. Cura is visible in everything the user reads (marketplace title, README, first-action copy, every skill's output footer); the slash command stays short.
+
+## Brand convention (lock this — don't drift)
+
+- **Marketplace title and README:** "Monet by Cura"
+- **Plugin description (manifest + marketplace):** lead with "Monet by Cura — …"
+- **Setup's first message:** "Hi — I'm Monet, the Claude Automation plugin from Cura (cura.inc)."
+- **Every skill's output footer:** end with `— Monet, by Cura (cura.inc)` on its own line. Quiet but constant. Below any upgrade nudge.
+- **Slash commands:** stay `/monet:*` for typing speed.
+- **Don't say "the Cura plugin"** anywhere — it's "Monet" or "Monet by Cura."
 
 ## Strategic frame
 
