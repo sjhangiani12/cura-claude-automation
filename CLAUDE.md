@@ -35,16 +35,18 @@ The `description` field is the trigger. Write it as natural-language use cases, 
 
 Study `anthropics/knowledge-work-plugins` skill descriptions as templates (e.g. `sales/skills/call-prep/SKILL.md`).
 
-## Current version: v0.3.0
+## Current version: v0.4.0
 
 Shipped:
 - Plugin scaffold (manifest, marketplace listing, README, LICENSE, CHANGELOG, .gitignore)
-- `setup` skill — guided onboarding. Connector audit + 6-question fund profile → `~/.cura/cura-config.md`. Invoked via `/cura:setup`.
-- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.cura/cura-config.md`. Falls back to legacy working-dir location, then to inline context. Invoked via `/cura:inbound-triage`.
+- `setup` skill — guided onboarding with two modes: **synthesis** (drafts profile from connected Gmail/Attio/Granola/Drive/Cura, user confirms each section) or **manual** (6 questions). Writes to `~/.cura/cura-config.md`. Invoked via `/cura:setup`.
+- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.cura/cura-config.md`. Invoked via `/cura:inbound-triage`.
+
+Synthesis directives per section live in `skills/setup/references/synthesis.md`. Worth re-reading when adding new connectors or new profile sections.
 
 Building next:
-- v0.4.0 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
-- v0.3.x — voice references via file paths (currently inline only)
+- v0.5.0 — `diligence` skill (full company workup orchestrator, `/cura:diligence`)
+- v0.4.x — voice references via Drive/Notion file paths (currently inline + auto-synthesis only)
 
 ## Config persistence
 

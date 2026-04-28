@@ -28,10 +28,13 @@ Invoke as `/cura:setup`, `/cura:inbound-triage`, etc. See [docs/build-plan.md](d
 ## Quick start
 
 1. Install the plugin (above).
-2. Type `/cura:setup` — Cura walks you through ~6 questions about your fund (thesis, sectors, stage, founder pattern, voice, network) and audits which connectors you have wired up. Takes about 5 minutes. Writes `cura-config.md` to your working directory.
-3. Forward a founder inbound and run `/cura:inbound-triage` to score it.
+2. Type `/cura:setup`. Cura audits which tools you have connected and offers two modes:
+   - **Draft from my tools** — synthesizes your fund profile from Gmail, Attio, Granola, Drive, or Cura. You confirm or correct each section. About 1-2 minutes if you have connectors.
+   - **Manual questions** — 6 questions about thesis, sectors, stage, founder pattern, voice, network. About 5 minutes.
+3. Profile saves to `~/.cura/cura-config.md` — works in every Cowork conversation, no matter what folder you're in.
+4. Forward a founder inbound and run `/cura:inbound-triage` to score it.
 
-Re-run `/cura:setup` anytime to update individual sections without starting from scratch.
+Re-run `/cura:setup` anytime to update individual sections.
 
 ### Recommended connectors
 

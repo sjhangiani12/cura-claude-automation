@@ -2,6 +2,29 @@
 
 All notable changes to the Cura plugin are documented here. Format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/); versioning follows [SemVer](https://semver.org/).
 
+## [0.4.0] — 2026-04-28
+
+Setup synthesizes the fund profile from connected tools.
+
+### Added
+- **Synthesis mode in `/cura:setup`.** When Gmail, Attio, Granola, Drive, or Cura is connected, setup now offers to draft the fund profile from those tools instead of asking 6 questions cold. The user confirms or corrects each derived section.
+  - **Sectors** — derived from Attio or Cura portfolio (group by industry tag)
+  - **Stage & check** — derived from median of last N investments
+  - **Network** — derived from Attio contact frequency or Gmail thread count
+  - **Voice** — derived from Gmail sent emails (last 90 days of founder replies) + Drive memos + Granola transcripts
+  - **Thesis** — derived from Drive docs ("thesis", "fund memo") or fund website
+  - **Founder pattern** — best-effort from past decisions in Cura/Attio; usually still asks the user
+  - Each derivation is shown to the user with its source ("drafted from your Attio portfolio of 23 companies"). Full directives in `skills/setup/references/synthesis.md`.
+- Three modes via `AskUserQuestion`: [Draft from my tools] [Manual questions] [Mix — draft what's possible, ask the rest].
+
+### Changed
+- `setup` SKILL.md restructured: Steps 0-2 unchanged (state check, frame, connector audit), new Step 3 picks mode, Step 4 branches to synthesis or manual, Steps 5-7 unchanged.
+- Upgrade nudge now branches: "Cura would auto-populate this..." when Cura MCP is missing; "Profile drafted from your Cura fund brain" when present.
+
+### Notes
+- Synthesis works without Cura MCP — Attio + Gmail alone cover sectors, stage, network, and voice. Cura adds founder pattern derivation and full thesis lookup.
+- The `created_via` source attribution in the saved config lets future setup re-runs offer "your portfolio's grown — re-derive sectors?"
+
 ## [0.3.0] — 2026-04-28
 
 Config now persists across Cowork sessions.
