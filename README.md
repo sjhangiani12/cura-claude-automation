@@ -22,12 +22,16 @@ Once installed, type `/monet` in Cowork to filter the picker to Monet skills, or
 | Skill | What it does |
 |---|---|
 | `setup` | Guided onboarding — drafts your fund profile from connected tools (Gmail, Attio, Granola, Drive, Cura), you review and edit. Saves to `~/.monet/monet-config.md`. |
-| `inbound-triage` | Score a founder inbound against your thesis; get a verdict, first-call questions, and a draft reply in your voice. |
-| `diligence` | *(planned)* Full company workup → memo in your voice |
-| `weekly-digest` | *(planned)* "What needs me" brief — overdue replies, gone-quiet portcos, LP touch-points, intros owed |
-| `lp-letter` | *(planned)* Quarterly LP letter draft in your voice |
+| `triage-inbound-deals` | Score a founder inbound against your thesis; get a verdict, first-call questions, and a draft reply in your voice |
+| `summarize-pending-work-this-week` | *(planned)* Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs |
+| `write-investment-memo-for-deal` | *(planned)* Investment memo in your voice from research artifacts |
+| `run-full-diligence-on-company` | *(planned)* Multi-stage company workup: founders, market, competitors, risks |
+| `draft-warm-intro-for-portco` | *(planned)* Match a portco's intro request to your network, draft the email |
+| `write-quarterly-lp-letter` | *(planned)* Quarterly LP letter in your voice |
+| `prep-for-first-founder-call` | *(planned)* Context + sharp questions before a 30-min intro call |
+| `gather-references-on-founder` | *(planned)* Find references, draft outreach, synthesize signal |
 
-Invoke as `/monet:setup`, `/monet:inbound-triage`, etc. See [docs/build-plan.md](docs/build-plan.md) for the roadmap.
+Invoke as `/monet:setup`, `/monet:triage-inbound-deals`, etc. See [docs/build-plan.md](docs/build-plan.md) for the roadmap.
 
 ## Quick start
 
@@ -36,7 +40,7 @@ Invoke as `/monet:setup`, `/monet:inbound-triage`, etc. See [docs/build-plan.md]
    - **Draft from my tools** — synthesizes your fund profile from Gmail, Attio, Granola, Drive, or Cura. You review and edit. About 1-2 minutes if you have connectors.
    - **Manual questions** — 6 questions about thesis, sectors, stage, founder pattern, voice, network. About 5 minutes.
 3. Profile saves to `~/.monet/monet-config.md` — works in every Cowork conversation, no matter what folder you're in.
-4. Forward a founder inbound and run `/monet:inbound-triage` to score it.
+4. Forward a founder inbound and run `/monet:triage-inbound-deals` to score it.
 
 Re-run `/monet:setup` anytime to update individual sections.
 

@@ -1,10 +1,10 @@
 ---
-name: inbound-triage
-description: Triage an inbound founder pitch (forwarded email, deck link, intro DM, cold message) against the GP's fund thesis. Returns a pass/maybe/yes verdict with reasoning, the questions to ask if it's worth a meeting, and a draft reply in the GP's voice. Trigger with "triage this inbound", "is this a fit", "should I take this meeting", "what do I do with this pitch", "draft a reply to this founder", or when the user pastes/forwards a founder cold outreach.
+name: triage-inbound-deals
+description: Triage an inbound founder pitch (forwarded email, deck link, intro DM, cold message, syndicate ping) against the GP's fund thesis. Returns a pass/maybe/yes verdict with reasoning, the questions to ask if it's worth a meeting, and a draft reply in the GP's voice. Trigger with "triage this inbound", "triage this deal", "is this a fit", "should I take this meeting", "what do I do with this pitch", "draft a reply to this founder", or when the user pastes/forwards a founder cold outreach.
 argument-hint: "[inbound text, forwarded email, or company name + link]"
 ---
 
-# Inbound Triage
+# Triage Inbound Deals
 
 Score a founder's inbound against the fund's thesis and draft a response. Designed for solo GPs who get more cold inbound than they can hand-screen.
 

@@ -4,6 +4,20 @@ All notable changes to the Monet plugin are documented here. Format follows [Kee
 
 > Brand history: this plugin was named `cura` through v0.4.1. Renamed to `monet` at v0.5.0 to distinguish the plugin/product (Monet) from the parent company (Cura at cura.inc). All `/cura:*` commands and `~/.cura/` paths from earlier versions are now `/monet:*` and `~/.monet/`.
 
+## [0.5.2] — 2026-04-29
+
+Skill naming convention locked. First rename: `inbound-triage` → `triage-inbound-deals`.
+
+### Changed
+- **Skill rename: `inbound-triage` → `triage-inbound-deals`.** Slash command is now `/monet:triage-inbound-deals`. Old `/monet:inbound-triage` no longer works.
+- **Naming convention locked across the catalog.** Verb-object, descriptive enough that the picker self-documents. Plurals for stream ops; singular for the-one-thing ops. Future skills will follow this pattern: `summarize-pending-work-this-week`, `write-investment-memo-for-deal`, `run-full-diligence-on-company`, `draft-warm-intro-for-portco`, `write-quarterly-lp-letter`, `prep-for-first-founder-call`, `gather-references-on-founder`.
+- `docs/build-plan.md` now contains the full ~22-skill catalog, organized by category, mapped 1:1 from manual VC workflows.
+- README + CLAUDE.md updated to reflect the new skill name and roadmap.
+
+### Notes
+- The renamed skill's behavior is unchanged from v0.5.1 — same prompts, same output format, same fallback chain. This is purely a rename.
+- Build process: no new skill begins until the previous one passes Phase 5 (3 consecutive good runs in real-user testing).
+
 ## [0.5.1] — 2026-04-28
 
 Brand polish: lead with "Monet by Cura" everywhere user-facing.

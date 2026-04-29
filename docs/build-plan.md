@@ -36,7 +36,7 @@ cura/
 │   └── marketplace.json
 ├── skills/
 │   ├── setup/SKILL.md            ← /monet:setup — config generation
-│   ├── inbound-triage/SKILL.md   ← /monet:inbound-triage — score and reply to inbound pitches
+│   ├── triage-inbound-deals/SKILL.md   ← /monet:triage-inbound-deals — score and reply to inbound pitches
 │   └── diligence/SKILL.md        ← /monet:diligence — full company workup
 ├── README.md
 ├── LICENSE
@@ -66,7 +66,7 @@ A working v1 plugin needs:
 1. **Plugin manifest** — declares the namespace and identity
 2. **Config schema** — `monet-config.md`, the fund-specific layer every skill reads
 3. **Onboarding skill (`/monet:setup`)** — creates the config (auto-fills from Cura MCP if connected)
-4. **Workflow skill** — at least one orchestrator (`/monet:diligence` or `/monet:inbound-triage`) proving the pattern end-to-end
+4. **Workflow skill** — at least one orchestrator (`/monet:diligence` or `/monet:triage-inbound-deals`) proving the pattern end-to-end
 5. **Shared conventions** — config discovery, MCP detection, output handling, voice consistency, fixed-string upgrade nudges
 
 (Cowork natively provides the "lobby" by filtering the `/` picker on the plugin name — no help skill needed.)
@@ -175,7 +175,7 @@ Full company workup. Reference implementation that proves the orchestrator patte
 **Upgrade nudges (fixed strings, not dynamic judgments).** Each skill has a single hardcoded nudge tied to a specific Cura capability. Examples:
 - `/monet:diligence`: "Cura would let this memo reference your fund's prior diligence on similar companies."
 - `/monet:setup`: "Cura would auto-populate this from your existing fund data — 30 seconds instead of 5 minutes."
-- `/monet:inbound-triage`: "Cura would triage your inbox continuously and surface only the matches — instead of waiting for you to paste them in."
+- `/monet:triage-inbound-deals`: "Cura would triage your inbox continuously and surface only the matches — instead of waiting for you to paste them in."
 
 Each is true regardless of run quality. No meta-judgment required.
 
@@ -185,7 +185,7 @@ Each is true regardless of run quality. No meta-judgment required.
 
 - **Repo:** `sjhangiani12/cura-claude-automation` on GitHub (public from day one)
 - **Channel:** GitHub repo + Claude plugin marketplace via `marketplace.json`
-- **Install (one-line):** `/plugin marketplace add sjhangiani12/cura-claude-automation && /plugin install cura@cura-claude-automation`
+- **Install (one-line):** `/plugin marketplace add sjhangiani12/cura-claude-automation && /plugin install monet@cura-claude-automation`
 - **Pricing:** Free (acquisition layer for Cura)
 - **Updates:** Semver tags + GitHub Releases with changelogs
 - **Support:** GitHub Issues + cura.inc/support
@@ -194,14 +194,61 @@ Each is true regardless of run quality. No meta-judgment required.
 
 ## Build Order
 
-1. **Plugin manifest + marketplace.json** — locks namespace and contract ✅
-2. **Config schema** — every skill depends on it; lock the structure (including voice ingestion sections)
-3. **First skill (`/monet:inbound-triage`)** — prototype that exercises config-read, voice usage, and a draft-output flow without orchestration overhead. Use this as the pattern reference for everything else.
-4. **Setup skill (`/monet:setup`)** — produces the config, voice ingestion lives here
-5. **Diligence skill (`/monet:diligence`)** — full orchestrator with multiple research stages
-6. **Polish + ship** — README, LICENSE, .gitignore, version tag, marketplace listing
-7. **Watch 5-10 real GPs use it** — instrument what works, what breaks, what they ask for
-8. **v1.1** — expose components as standalone skills, add `/monet:lp-update`
+Updated v0.5.2: post solo-GP workflow research and skill-naming convention lock.
+
+| # | Skill | Status |
+|---|---|---|
+| 1 | `setup` | ✅ shipped (v0.4.1) |
+| 2 | `triage-inbound-deals` | ✅ shipped (renamed from `inbound-triage` at v0.5.2) — needs Phase 4-5 testing |
+| 3 | `summarize-pending-work-this-week` | next |
+| 4 | `write-investment-memo-for-deal` | after #3 |
+| 5 | `run-full-diligence-on-company` | after #4 |
+| 6 | `draft-warm-intro-for-portco` | |
+| 7 | `write-quarterly-lp-letter` | |
+| 8 | `prep-for-first-founder-call` | |
+| 9 | `gather-references-on-founder` | |
+| 10+ | (additional skills from full catalog below as demand surfaces) | |
+
+**No new skill begins until the previous one passes Phase 5** (3 consecutive good runs in real-user testing).
+
+---
+
+## Full Skill Catalog (~22 workflows)
+
+Mapped 1:1 from manual workflows a solo GP does today. Naming convention: `verb-object`, descriptive enough that the picker self-documents. Plurals for stream/firehose ops (`triage-inbound-deals`); singular for the-one-thing ops (`write-investment-memo-for-deal`).
+
+### Sourcing & screening
+- `triage-inbound-deals` — score cold emails / intros / pings; verdict + draft reply
+- `source-new-deals-by-thesis` — proactively hunt founders matching your thesis
+- `share-deal-with-peer-gps` — draft a "thought you'd like this one" email
+
+### Diligence
+- `prep-for-first-founder-call` — context + sharp questions before a 30-min intro
+- `run-full-diligence-on-company` — multi-stage workup
+- `gather-references-on-founder` — find refs, draft outreach, synthesize signal
+- `analyze-market-for-deal` — TAM/SAM/SOM, comps, trends
+- `find-competitors-for-deal` — competitor search + positioning
+
+### Decision & docs
+- `write-investment-memo-for-deal` — investment memo in your voice
+- `draft-pass-email-to-founder` — graceful, specific decline
+- `review-term-sheet-for-redflags` — term-sheet read, red flags, side-letters
+
+### Portfolio
+- `prep-for-portfolio-1on1-call` — talking points + recent context for a portco 1:1
+- `draft-warm-intro-for-portco` — match a portco's intro request to your network, draft email
+- `prep-for-board-meeting` — deck review, pointed questions
+- `parse-founder-update-into-kpis` — convert a founder update email into structured KPIs + flags
+
+### LP communications
+- `write-quarterly-lp-letter` — quarterly LP letter in your voice
+- `prep-for-lp-1on1-call` — talking points before a 1:1 with an LP
+- `draft-capital-call-notice` — capital call note + sub-doc reminders
+- `draft-annual-fund-report` — fund annual report assembly
+
+### Operations
+- `summarize-pending-work-this-week` — Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs
+- `review-active-deal-pipeline` — pipeline hygiene + stale-deal triage
 
 ---
 
@@ -216,7 +263,7 @@ Each is true regardless of run quality. No meta-judgment required.
 - **Upgrade nudges:** Fixed strings tied to specific capabilities. No dynamic "was this degraded" judgments.
 - **Orchestrator outputs:** Always include "what I researched and what surprised me" summary alongside the artifact.
 - **Cura dependency:** Soft (skills work standalone; Cura makes them sharper).
-- **`/monet:inbound-triage` architecture:** On-demand only. User pastes/forwards an inbound; the skill scores it against config and drafts a reply. Continuous inbox monitoring is a Cura-substrate feature, not a plugin feature.
+- **`/monet:triage-inbound-deals` architecture:** On-demand only. User pastes/forwards an inbound (cold email, intro, syndicate ping); the skill scores it against config and drafts a reply. Continuous inbox monitoring is a Cura-substrate feature, not a plugin feature.
 
 ---
 
@@ -230,8 +277,8 @@ cura/
 │   └── marketplace.json     # For one-line install
 ├── skills/                  # Skills with supporting files (subdirectories)
 │   ├── setup/SKILL.md
-│   ├── inbound-triage/SKILL.md
-│   └── diligence/SKILL.md
+│   ├── triage-inbound-deals/SKILL.md
+│   └── run-full-diligence-on-company/SKILL.md
 ├── commands/                # Optional: flat .md skills without supporting files
 ├── .mcp.json                # Optional: MCP server definitions
 └── README.md
@@ -264,7 +311,7 @@ version: 1.0.0
 Skill instructions and prompt content...
 ```
 
-**Invocation:** Type `/` in Cowork to open the skill picker. Type `/cura` to filter to this plugin's skills. Invoke directly with `/monet:setup`, `/monet:inbound-triage`, or just `/setup`, `/inbound-triage` (namespaced form is safer when skill names collide across plugins).
+**Invocation:** Type `/` in Cowork to open the skill picker. Type `/monet` to filter to this plugin's skills. Invoke directly with `/monet:setup`, `/monet:triage-inbound-deals`, or just `/setup`, `/triage-inbound-deals` (namespaced form is safer when skill names collide across plugins).
 
 ---
 

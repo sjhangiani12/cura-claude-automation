@@ -45,25 +45,36 @@ The `description` field is the trigger. Write it as natural-language use cases, 
 
 Study `anthropics/knowledge-work-plugins` skill descriptions as templates (e.g. `sales/skills/call-prep/SKILL.md`).
 
-## Current version: v0.5.0
+## Current version: v0.5.2
 
 Shipped:
 - Plugin scaffold (manifest, marketplace listing, README, LICENSE, CHANGELOG, .gitignore)
 - `setup` skill — guided onboarding with two modes: **synthesis** (drafts profile from connected Gmail/Attio/Granola/Drive/Cura, user reviews and edits the whole draft at once) or **manual** (6 questions). Writes to `~/.monet/monet-config.md`. Detects and migrates legacy configs from earlier plugin versions. Invoked via `/monet:setup`.
-- `inbound-triage` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.monet/monet-config.md` with legacy-location fallbacks. Invoked via `/monet:inbound-triage`.
+- `triage-inbound-deals` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.monet/monet-config.md` with legacy-location fallbacks. Invoked via `/monet:triage-inbound-deals`.
 
 Synthesis directives per section live in `skills/setup/references/synthesis.md`. Worth re-reading when adding new connectors or new profile sections.
 
-## Roadmap (from research)
+## Naming convention (locked)
+
+- **Verb-object** skill names that map 1:1 to a manual VC workflow.
+- Be specific. `summarize-pending-work-this-week` not `weekly-digest`. `write-investment-memo-for-deal` not `memo-write`.
+- Plurals for stream/firehose ops (`triage-inbound-deals`); singular for the-one-thing ops (`write-investment-memo-for-deal`).
+- The picker is the discoverability layer — names should be self-documenting so a GP can scan `/monet` and immediately know which skill matches their situation.
+
+## Roadmap (from research, with locked naming)
 
 Priority order based on solo-GP workflow research (`docs/research/solo-gp-workflows.md`):
 
-1. **`inbound-triage`** ✓ shipped — needs Phase 4-5 (test + tighten)
-2. **`weekly-digest`** — "what needs me" Monday brief; creates daily pull, surfaces data for other skills
-3. **`memo-write`** (was: `diligence`) — memo synthesis from deck + transcripts + emails; the wedge
-4. **`intro-triage`** — match portco intro requests against the GP's network, draft forwardable email
-5. **`lp-letter`** — quarterly LP letter draft in the GP's voice (creative writing, not template)
-6. **`reference-orchestration`** — find references for a founder, draft outreach, synthesize signal
+1. **`triage-inbound-deals`** ✓ shipped — needs Phase 4-5 (test + tighten)
+2. **`summarize-pending-work-this-week`** — Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs. Creates daily pull, surfaces data for other skills.
+3. **`write-investment-memo-for-deal`** — memo synthesis from deck + transcripts + emails. The wedge that justifies price.
+4. **`run-full-diligence-on-company`** — multi-stage workup that produces the artifacts memo-write consumes.
+5. **`draft-warm-intro-for-portco`** — match portco intro requests against the GP's network, draft forwardable email.
+6. **`write-quarterly-lp-letter`** — quarterly LP letter draft in the GP's voice (creative writing, not template).
+7. **`prep-for-first-founder-call`** — context + sharp questions before a 30-min intro call. Small scope, fast ship.
+8. **`gather-references-on-founder`** — find references, draft outreach, synthesize signal. Pairs with diligence.
+
+Full skill catalog (~22 workflows total) is in `docs/build-plan.md`.
 
 ## Build process — five phases per skill
 

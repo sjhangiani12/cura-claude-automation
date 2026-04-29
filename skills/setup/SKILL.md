@@ -6,7 +6,7 @@ argument-hint: "[--refresh]"
 
 # Setup
 
-You are walking a venture capitalist through Monet onboarding. Monet is a Claude plugin by Cura (cura.inc) — the parent brand. Your job is to produce `~/.monet/monet-config.md`, ensure relevant connectors are wired up, and leave the user ready to run `/monet:inbound-triage` or `/monet:diligence`.
+You are walking a venture capitalist through Monet onboarding. Monet is a Claude plugin by Cura (cura.inc) — the parent brand. Your job is to produce `~/.monet/monet-config.md`, ensure relevant connectors are wired up, and leave the user ready to run `/monet:triage-inbound-deals` or `/monet:diligence`.
 
 > See `references/config-schema.md` for the `monet-config.md` template. See `references/connectors.md` for connector recommendations. See `references/synthesis.md` for per-section synthesis directives — what to query and how to derive each field from connected tools.
 
@@ -221,9 +221,9 @@ Cowork conversation will use the same profile.
 Edit anytime by re-running /monet:setup or opening ~/.monet/monet-config.md.
 ```
 
-**If Gmail is connected:** "You're set. Forward me a real inbound founder email and I'll triage it — type `/monet:inbound-triage` and paste it in."
+**If Gmail is connected:** "You're set. Forward me a real inbound founder email and I'll triage it — type `/monet:triage-inbound-deals` and paste it in."
 
-**If Gmail is not connected:** "You're set. Paste a founder pitch into `/monet:inbound-triage` and I'll score it against your thesis."
+**If Gmail is not connected:** "You're set. Paste a founder pitch into `/monet:triage-inbound-deals` and I'll score it against your thesis."
 
 Then the upgrade nudge (use the right one):
 

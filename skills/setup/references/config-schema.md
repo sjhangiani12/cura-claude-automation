@@ -2,7 +2,7 @@
 
 The setup skill writes this file to `~/.monet/monet-config.md` — a user-level location that persists across all Cowork conversations and working directories. Other Monet skills read it from the same path. Keep it readable — the GP should be able to edit it by hand.
 
-**Why `~/.monet/` and not the working directory:** A VC runs setup once but invokes Monet skills from many different Cowork conversations. Storing the config under `~/.monet/` means `/monet:inbound-triage` and `/monet:diligence` work in any conversation without the user having to remember which folder their fund profile lives in.
+**Why `~/.monet/` and not the working directory:** A VC runs setup once but invokes Monet skills from many different Cowork conversations. Storing the config under `~/.monet/` means `/monet:triage-inbound-deals` and other skills work in any conversation without the user having to remember which folder their fund profile lives in.
 
 ```markdown
 ---
@@ -72,7 +72,7 @@ Hard no's. Anything that trips one of these = automatic PASS, regardless of othe
 ## Field handling rules (for the setup skill)
 
 - If the user skipped a question, write `_(not specified — re-run /monet:setup to add)_` in that section. Do not invent or pad.
-- Voice references go between `<!-- voice-start -->` and `<!-- voice-end -->` delimiters so the inbound-triage and (future) memo-drafting skills can extract them cleanly.
+- Voice references go between `<!-- voice-start -->` and `<!-- voice-end -->` delimiters so the `triage-inbound-deals` and (future) memo-writing skills can extract them cleanly.
 - Stage / check size / position should be parsed from the user's free-text answer into the three sub-bullets. If they only said "pre-seed, $500k checks", leave Position as "_(not specified)_".
 - Pass Criteria can be empty for v0.2.0 — the setup skill doesn't ask about it explicitly. Future versions can derive it from the founder pattern Q4 ("pass instantly" list) or add an explicit question.
 
