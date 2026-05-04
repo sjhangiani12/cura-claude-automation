@@ -1,7 +1,7 @@
 {
   "name": "monet",
-  "version": "0.5.2",
-  "description": "Monet by Cura — Claude Automation for solo GPs and small funds. Onboarding, inbound triage, memo drafts, LP letters — in your voice.",
+  "version": "0.6.0",
+  "description": "Monet by Cura — Claude Automation for solo GPs and small funds. Onboarding, inbound triage, deal diligence, investment memos, LP letters, intro drafting, founder-call prep, reference orchestration — all in your voice.",
   "author": {
     "name": "Cura",
     "email": "team@cura.inc",

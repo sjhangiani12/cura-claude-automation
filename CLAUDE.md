@@ -45,14 +45,26 @@ The `description` field is the trigger. Write it as natural-language use cases, 
 
 Study `anthropics/knowledge-work-plugins` skill descriptions as templates (e.g. `sales/skills/call-prep/SKILL.md`).
 
-## Current version: v0.5.2
+## Current version: v0.6.0
 
-Shipped:
-- Plugin scaffold (manifest, marketplace listing, README, LICENSE, CHANGELOG, .gitignore)
-- `setup` skill — guided onboarding with two modes: **synthesis** (drafts profile from connected Gmail/Attio/Granola/Drive/Cura, user reviews and edits the whole draft at once) or **manual** (6 questions). Writes to `~/.monet/monet-config.md`. Detects and migrates legacy configs from earlier plugin versions. Invoked via `/monet:setup`.
-- `triage-inbound-deals` skill — scores a founder inbound against the config, drafts a reply in fund voice. Reads from `~/.monet/monet-config.md` with legacy-location fallbacks. Invoked via `/monet:triage-inbound-deals`.
+Shipped — all priority skills:
+- `setup` — onboarding (synthesis or manual), writes `~/.monet/monet-config.md`
+- `triage-inbound-deals` — verdict + draft reply for cold founder inbound
+- `summarize-pending-work-this-week` — Monday brief across all categories of pending work
+- `prep-for-first-founder-call` — pre-meeting brief with founder-specific questions
+- `run-full-diligence-on-company` — multi-stage workup → structured findings file
+- `gather-references-on-founder` — candidate references + outreach drafts + synthesis rubric
+- `write-investment-memo-for-deal` — full memo from diligence artifacts in GP voice
+- `draft-warm-intro-for-portco` — match portco intro request → forwardable email
+- `write-quarterly-lp-letter` — quarterly LP letter in GP voice
 
-Synthesis directives per section live in `skills/setup/references/synthesis.md`. Worth re-reading when adding new connectors or new profile sections.
+Outputs (memos, diligence findings, LP letters) go to `~/.monet/outputs/`. Config stays at `~/.monet/monet-config.md`. Both persist across all Cowork conversations.
+
+Skills compose naturally:
+- `prep-for-first-founder-call` → first call → `triage-inbound-deals` (if cold) or `run-full-diligence-on-company` (if pursuing)
+- `run-full-diligence-on-company` → produces findings → `gather-references-on-founder` adds reference signal → `write-investment-memo-for-deal` synthesizes the memo
+
+References (per-skill detail) live at `skills/<name>/references/`. The shared voice-rules are at `skills/write-investment-memo-for-deal/references/voice-rules.md` — referenced by other long-form skills.
 
 ## Naming convention (locked)
 
@@ -61,20 +73,34 @@ Synthesis directives per section live in `skills/setup/references/synthesis.md`.
 - Plurals for stream/firehose ops (`triage-inbound-deals`); singular for the-one-thing ops (`write-investment-memo-for-deal`).
 - The picker is the discoverability layer — names should be self-documenting so a GP can scan `/monet` and immediately know which skill matches their situation.
 
-## Roadmap (from research, with locked naming)
+## What's next
 
-Priority order based on solo-GP workflow research (`docs/research/solo-gp-workflows.md`):
+All 8 priority skills are shipped. Next phase is **Phase 4-5 testing** — running each skill against real cases, capturing flaws, tightening prompts. The build process:
 
-1. **`triage-inbound-deals`** ✓ shipped — needs Phase 4-5 (test + tighten)
-2. **`summarize-pending-work-this-week`** — Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs. Creates daily pull, surfaces data for other skills.
-3. **`write-investment-memo-for-deal`** — memo synthesis from deck + transcripts + emails. The wedge that justifies price.
-4. **`run-full-diligence-on-company`** — multi-stage workup that produces the artifacts memo-write consumes.
-5. **`draft-warm-intro-for-portco`** — match portco intro requests against the GP's network, draft forwardable email.
-6. **`write-quarterly-lp-letter`** — quarterly LP letter draft in the GP's voice (creative writing, not template).
-7. **`prep-for-first-founder-call`** — context + sharp questions before a 30-min intro call. Small scope, fast ship.
-8. **`gather-references-on-founder`** — find references, draft outreach, synthesize signal. Pairs with diligence.
+1. User runs the skill against 2+ real cases
+2. Pastes outputs to chat
+3. We identify what's wrong (voice, generic content, missing edge cases, hallucinations)
+4. Tighten prompts
+5. Repeat until 3 consecutive good runs per skill
 
-Full skill catalog (~22 workflows total) is in `docs/build-plan.md`.
+Per-skill testing priority (matches creation priority):
+1. `triage-inbound-deals` — quickest to test, smallest scope
+2. `summarize-pending-work-this-week` — needs full Cowork session with connectors
+3. `prep-for-first-founder-call` — easy to test if user has an upcoming founder meeting
+4. `run-full-diligence-on-company` — slow per-run, but high signal
+5. `write-investment-memo-for-deal` — pairs with diligence
+6. `gather-references-on-founder` — only meaningful with real network connections
+7. `draft-warm-intro-for-portco` — needs portco intro request to test
+8. `write-quarterly-lp-letter` — quarterly cadence, lower urgency
+
+Future skills (see `docs/build-plan.md` full catalog) ship only after the priority 8 are stable:
+- `source-new-deals-by-thesis` — proactive sourcing (lower priority — nobody really asks for AI to do this yet)
+- `share-deal-with-peer-gps` — deal-share emails
+- `analyze-market-for-deal`, `find-competitors-for-deal` — currently bundled into diligence; can split out
+- `prep-for-portfolio-1on1-call`, `prep-for-board-meeting`, `parse-founder-update-into-kpis` — portfolio support
+- `prep-for-lp-1on1-call`, `draft-capital-call-notice`, `draft-annual-fund-report` — LP comms
+- `draft-pass-email-to-founder` — currently bundled into triage; can split
+- `review-active-deal-pipeline`, `review-term-sheet-for-redflags` — operations
 
 ## Build process — five phases per skill
 

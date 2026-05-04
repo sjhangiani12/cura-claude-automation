@@ -4,6 +4,30 @@ All notable changes to the Monet plugin are documented here. Format follows [Kee
 
 > Brand history: this plugin was named `cura` through v0.4.1. Renamed to `monet` at v0.5.0 to distinguish the plugin/product (Monet) from the parent company (Cura at cura.inc). All `/cura:*` commands and `~/.cura/` paths from earlier versions are now `/monet:*` and `~/.monet/`.
 
+## [0.6.0] — 2026-05-04
+
+Big drop: 7 new priority skills built. Plugin now covers the core solo-GP workflow loop end-to-end.
+
+### Added
+- **`summarize-pending-work-this-week`** — Monday-morning brief across 8 categories of pending work (cold inbounds, active deals, quiet portcos, untouched LPs, owed intros, this week's calendar, dropped commitments, stale pipeline). Pulls from Gmail/Calendar/Attio/Granola/Drive/Cura. Per-category query directives in `references/categories.md`.
+- **`prep-for-first-founder-call`** — pre-meeting brief in 60-90 seconds: company snapshot, founder snapshot, thesis-fit indicators, 5-7 founder-specific questions. Question-quality patterns in `references/question-bank.md` (sector + stage specific).
+- **`run-full-diligence-on-company`** — 6-stage workup (company profile, founders, market, competitive, risks, reference candidates). Produces structured findings at `~/.monet/outputs/[company]-diligence-[date].md`. Per-stage research directives in `references/diligence-stages.md`.
+- **`gather-references-on-founder`** — finds 5-8 plausible reference candidates from the GP's network, drafts outreach emails per candidate, provides 5-question synthesis rubric for capturing signal during/after calls. Rubric in `references/reference-rubric.md`.
+- **`write-investment-memo-for-deal`** — full memo from diligence artifacts. Default 2000-3000 words; `--short` flag for one-pager. Heavy emphasis on voice fidelity (see `references/voice-rules.md`). Memo template at `references/memo-template.md`.
+- **`draft-warm-intro-for-portco`** — matches portco intro request to GP's network (Attio + Gmail + Cura), ranks by warmth × relevance, drafts forwardable email in GP voice with optional permission ping for stale/reach connections. Rules in `references/intro-rules.md`.
+- **`write-quarterly-lp-letter`** — quarterly LP letter as creative writing in GP voice (not templatized). Pulls prior letters from Drive for voice gold, portfolio updates this quarter, fund operations. Format guide in `references/lp-letter-format.md`.
+
+### Conventions established
+- **Outputs to `~/.monet/outputs/`.** Memos, diligence findings, LP letters all save here — same user-level location as the config. Triage and prep skills are chat-only (ephemeral).
+- **Voice rules shared.** All long-form skills (memo, LP letter, intro, pass email) reference `skills/write-investment-memo-for-deal/references/voice-rules.md` for voice cloning.
+- **Skills compose.** `run-full-diligence` produces findings → `gather-references` adds signal → `write-investment-memo` synthesizes. Each can also run standalone.
+- **Footer everywhere.** Every skill ends with `— Monet, by Cura (cura.inc)` and a Cura-MCP-aware upgrade nudge.
+- **Imperative skill bodies, plain user-facing language.** Same rules as `setup` and `triage`.
+
+### Notes
+- This is the full priority-8 catalog. Future skills (`source-new-deals-by-thesis`, `prep-for-board-meeting`, `draft-capital-call-notice`, etc.) ship only after the priority 8 hit Phase 5 stability (3 consecutive good runs in real-user testing).
+- All skills are buildable with currently-available connectors. Cura MCP integration is already wired in — when Cura ships, skills will get sharper without code changes.
+
 ## [0.5.2] — 2026-04-29
 
 Skill naming convention locked. First rename: `inbound-triage` → `triage-inbound-deals`.

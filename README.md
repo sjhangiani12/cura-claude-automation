@@ -23,13 +23,13 @@ Once installed, type `/monet` in Cowork to filter the picker to Monet skills, or
 |---|---|
 | `setup` | Guided onboarding — drafts your fund profile from connected tools (Gmail, Attio, Granola, Drive, Cura), you review and edit. Saves to `~/.monet/monet-config.md`. |
 | `triage-inbound-deals` | Score a founder inbound against your thesis; get a verdict, first-call questions, and a draft reply in your voice |
-| `summarize-pending-work-this-week` | *(planned)* Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs |
-| `write-investment-memo-for-deal` | *(planned)* Investment memo in your voice from research artifacts |
-| `run-full-diligence-on-company` | *(planned)* Multi-stage company workup: founders, market, competitors, risks |
-| `draft-warm-intro-for-portco` | *(planned)* Match a portco's intro request to your network, draft the email |
-| `write-quarterly-lp-letter` | *(planned)* Quarterly LP letter in your voice |
-| `prep-for-first-founder-call` | *(planned)* Context + sharp questions before a 30-min intro call |
-| `gather-references-on-founder` | *(planned)* Find references, draft outreach, synthesize signal |
+| `summarize-pending-work-this-week` | Monday brief: overdue replies, quiet portcos, owed intros, untouched LPs, this week's calendar |
+| `prep-for-first-founder-call` | Context + sharp questions before a 30-min intro call |
+| `run-full-diligence-on-company` | Multi-stage company workup: founders, market, competitors, risks. Produces structured findings. |
+| `gather-references-on-founder` | Find references, draft outreach, provide synthesis rubric |
+| `write-investment-memo-for-deal` | Investment memo in your voice from research artifacts |
+| `draft-warm-intro-for-portco` | Match a portco's intro request to your network, draft the forwardable email |
+| `write-quarterly-lp-letter` | Quarterly LP letter in your voice — pulls portfolio updates, prior letters for voice, fund activity |
 
 Invoke as `/monet:setup`, `/monet:triage-inbound-deals`, etc. See [docs/build-plan.md](docs/build-plan.md) for the roadmap.
 
